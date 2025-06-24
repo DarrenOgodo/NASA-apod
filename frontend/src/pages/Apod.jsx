@@ -21,7 +21,7 @@ function Apod() {
             const res = await fetch(`${API_BASE}/api/apod?date=${date}`);
             
             if(res.ok){
-                const data = await res.json();
+                console.log(data);
                 setApod(data);
             }else{
                 const data = await res.json();
@@ -53,10 +53,14 @@ function Apod() {
                 <div style={{marginTop:"20px"}} id="con">
                     <h2>{apod.title} ({apod.date})</h2>
                     {apod.media_type === "image" ? (
-                        <img src={apod.url} alt={apod.title} style={{ maxWidth:'100%' }}/>
-                    ) : (
-                        <iframe src={apod.url} title="apod video" style={{ width:'100%' , height:'500px'}}></iframe>
-                    )}
+                        <img src={apod.hdurl || apod.url} alt={apod.title} style={{ maxWidth:'100%' }}/>
+                    ) : apod.media_type === "video" ? (
+                        <iframe src={apod.url} title={apod.title} style={{ width:'95%', minHeight:'450px'}} allowFullScreen></iframe>
+                    ) : <h3>{apod.url ? 
+                    `See video at ${apod.url}` : 
+                    "No media provided!"}
+                        </h3>
+                    }
 
                     <p>{apod.explanation}</p>
 

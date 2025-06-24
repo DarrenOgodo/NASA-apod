@@ -18,7 +18,7 @@ app.get('/api/apod', async(req,res) =>{
     });
 
     try{
-        console.log("Attempting to get apod data");
+        // console.log("Attempting to get apod data");
         const url = `https://api.nasa.gov/planetary/apod?${params.toString()}`;
 
         const response = await fetch(url);
