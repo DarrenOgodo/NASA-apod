@@ -21,7 +21,7 @@ function Apod() {
             const res = await fetch(`${API_BASE}/api/apod?date=${date}`);
             
             if(res.ok){
-                console.log(data);
+                const data = await res.json();
                 setApod(data);
             }else{
                 const data = await res.json();
